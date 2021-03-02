@@ -1,45 +1,50 @@
 # Description
-Service view and evaluate films 
 
-## Start application 
+Service view and evaluate films
+
+## Start application
 
 ```
 	npm run production
 ```
 
-## Details 
-	### User can
-		- Log in
-		- Evaluate film
-		- Add comment for film 
-		- Add in bookmarks
-		- Add in favorites ( like )
+## Details
 
-    ### Manager can
+    ###### User can
+    	- Log in
+    	- Evaluate film
+    	- Add comment for film
+    	- Add in bookmarks
+    	- Add in favorites ( like )
+
+    ###### Manager can
     	- Add new film for evaluate
-    ### Admin can
+    ###### Admin can
     	- Add manager
 
 ## Site pages
-	- Main page
-	- Film page 
-	- User page
 
-## Functionality 
-	- Search
+    - Main page
+    - Film page
+    - User page
+
+## Functionality
+
+    - Search
 
 ## Data
-	### User 
-		- Login * 
-		- Password * 
-		- FIO
-		- Gander 
-		- Date birthday 
-		- Phone number
-		- Email
-		- Addres
 
-    ### Filmpage
+    ###### User
+    	- Login *
+    	- Password *
+    	- FIO
+    	- Gander
+    	- Date birthday
+    	- Phone number
+    	- Email
+    	- Addres
+
+    ###### Filmpage
     	- Production year
     	- Country
     	- Genre
@@ -64,15 +69,16 @@ Service view and evaluate films
     	- Roles duplicatied
 
 ## Api
+
 x - Authorized
 
-| Method | Url | Description |
-| ------ | --- | ----------- |
-| GET | /api/listFilms | Get list films with limit |
-| GET | api/getFilmPage | See film page |
-| GET| api/search | Search on name film |
-| PUT | api/estimateFilm | Estimate film (x) |
-| POST | api/addNewBookmark | Add in bookmark (x) |
-| POST | api/addNewFavorite | Add in favorites (x) |
-| UPDATE | api/updateUserData | Update data about me (x) |
-| POST | api/writeComment | Write comment (x) |
+| Method | Url                | Description               |
+| ------ | ------------------ | ------------------------- |
+| GET    | /api/listFilms     | Get list films with limit |
+| GET    | api/getFilmPage    | See film page             |
+| GET    | api/search         | Search on name film       |
+| PUT    | api/estimateFilm   | Estimate film (x)         |
+| POST   | api/addNewBookmark | Add in bookmark (x)       |
+| POST   | api/addNewFavorite | Add in favorites (x)      |
+| UPDATE | api/updateUserData | Update data about me (x)  |
+| POST   | api/writeComment   | Write comment (x)         |
