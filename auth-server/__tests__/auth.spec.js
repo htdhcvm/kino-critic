@@ -1,5 +1,26 @@
+const request = require('supertest');
+const { response } = require('../app');
+const app = require('../app');
+
+jest.mock('RefreshSession');
+jest.mock('getUser');
+
+let listRefreshSessions;
+let user;
+
+beforeAll(() => {
+    listRefreshSessions = require('RefreshSession');
+    user = require('getUser');
+});
+
 describe('auth tests', () => {
-    test.todo('User login, create tokens');
+    test('User login, create tokens', async done => {
+        const responseLogin = await request(app).post('/login').send(user);
+
+        console.log(responseLogin);
+
+        done();
+    });
     test.todo('User get 403 if his data invalid');
     test.todo('User get 401 if expired token');
     test.todo('User can refresh token');
