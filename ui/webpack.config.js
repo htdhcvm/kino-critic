@@ -23,6 +23,10 @@ module.exports = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
             },
+            {
+                test: /\.s[ac]ss$/i,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
         ],
     },
     devServer: {
@@ -30,5 +34,6 @@ module.exports = {
         port: 3001,
         publicPath: 'http://localhost:3001/dist/',
         hot: true,
+        historyApiFallback: true,
     },
 };
