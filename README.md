@@ -29,8 +29,11 @@ npm run production
 ## Site pages
 
 -   Main page
+    ![alt text](https://github.com/htdhcvm/kino-critic/blob/client/assets/main.gif)
 -   Film page
 -   User page
+-   Sign in page
+-   Sign up page
 
 ## Functionality
 
