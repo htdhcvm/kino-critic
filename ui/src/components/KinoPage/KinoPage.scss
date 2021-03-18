@@ -1,0 +1,56 @@
+.kinoPage {
+    padding: 20px 40px;
+    .body-kino {
+        display: grid;
+        grid-template-areas: 'photo mainContent rating';
+        grid-gap: 30px;
+
+        .photo {
+            grid-area: photo;
+        }
+        .main-content {
+            grid-area: mainContent;
+        }
+        .rating {
+            grid-area: rating;
+
+            h2 {
+                margin: 0px;
+                margin-right: 10px;
+                color: #2aa951;
+                font-weight: 700;
+            }
+            display: flex;
+            align-items: baseline;
+        }
+        .rating-setings {
+            .body {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .comments {
+            .body-comments {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                textarea {
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 250px;
+                    resize: none;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                }
+            }
+            .devider {
+                background-color: #f5f5fb;
+                width: 100%;
+                height: 1px;
+                margin: 20px 0px;
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+.SignInManager {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+        margin: auto;
+        margin-top: 10%;
+        img {
+            margin-bottom: 20px;
+        }
+        .max-width {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+}
