@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import './KinoPage.scss';
 
@@ -14,10 +15,30 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { requestKinoData } from '@features/postSlice';
+import { requestCommentsOnIdKinoFilm } from '@features/commentsSlice';
+
 import Header from '../Header/Header';
 import ItemComments from '../ItemComments/ItemComments';
 
 const KinoPage = () => {
+    let { id } = useParams();
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(requestKinoData(id));
+        dispatch(requestCommentsOnIdKinoFilm(id));
+    }, []);
+
+    const title = useSelector(state => state.post.title);
+    const review = useSelector(state => state.post.review);
+    const rating = useSelector(state => state.post.rating);
+    const comments = useSelector(state => state.comments);
+
     return (
         <div className="kinoPage">
             <Header />
@@ -27,7 +48,7 @@ const KinoPage = () => {
                 </div>
                 <div className="main-content">
                     <Typography variant="h2" gutterBottom>
-                        Большой куш
+                        {title.title}
                     </Typography>
 
                     <div className="review">
@@ -35,114 +56,35 @@ const KinoPage = () => {
                             Обзор
                         </Typography>
                         <Typography variant="body1" gutterBottom>
-                            Четырехпалый Френки должен был переправить краденый
-                            алмаз из Англии в США своему боссу Эви, но, сделав
-                            ставку на подпольный боксерский поединок, попадает в
-                            круговорот весьма нежелательных событий. Вокруг него
-                            и его груза разворачивается сложная интрига с
-                            участием множества колоритных персонажей лондонского
-                            дна — русского гангстера, троих незадачливых
-                            грабителей, хитрого боксера и угрюмого громилы
-                            грозного мафиози. Каждый норовит в одиночку сорвать
-                            большой куш.
+                            {title.review}
                         </Typography>
                     </div>
                     <div className="about">
                         <Typography variant="h5" gutterBottom>
                             О фильме
                         </Typography>
-
                         <TableContainer component={Paper}>
                             <Table aria-label="simple table">
                                 <TableBody>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            name
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            calories
-                                        </TableCell>
-                                    </TableRow>
+                                    {Object.keys(review).map(item => {
+                                        return (
+                                            <TableRow key={uuidv4()}>
+                                                <TableCell
+                                                    key={uuidv4()}
+                                                    component="th"
+                                                    scope="row"
+                                                >
+                                                    {review[item].analogue}
+                                                </TableCell>
+                                                <TableCell
+                                                    key={uuidv4()}
+                                                    align="right"
+                                                >
+                                                    {review[item].value}
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -154,9 +96,11 @@ const KinoPage = () => {
                         <div className="body">
                             <div className="star">stars</div>
                             <div className="rating">
-                                <Typography variant="h2">8.649</Typography>
+                                <Typography variant="h2">
+                                    {rating.rating}
+                                </Typography>
                                 <Typography variant="subtitle1">
-                                    375 595
+                                    {rating.views}
                                 </Typography>
                             </div>
                         </div>
@@ -177,16 +121,19 @@ const KinoPage = () => {
                         </div>
                         <div className="devider"></div>
                         <div className="list">
-                            <ItemComments name="user_1" text="lorem lorem" />
-                            <ItemComments name="user_2" text="lorem lorem" />
-                            <ItemComments name="user_3" text="lorem lorem" />
-                            <ItemComments name="user_4" text="lorem lorem" />
+                            {comments.map(comment => (
+                                <ItemComments
+                                    key={uuidv4()}
+                                    name={comment.name}
+                                    text={comment.text}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
                 <div className="rating">
-                    <Typography variant="h2">8.6</Typography>
-                    <Typography variant="subtitle1">375к</Typography>
+                    <Typography variant="h2">{rating.rating}</Typography>
+                    <Typography variant="subtitle1">{rating.views}</Typography>
                 </div>
             </div>
         </div>
