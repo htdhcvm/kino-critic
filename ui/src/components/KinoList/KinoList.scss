@@ -1,0 +1,16 @@
+.kinoList {
+    padding: 20px 40px;
+
+    .list {
+        margin-top: 40px;
+        display: flex;
+        flex-flow: wrap;
+        justify-content: space-between;
+        .ItemFilm {
+            width: 150px;
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
