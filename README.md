@@ -85,13 +85,15 @@ npm run production
 
 x - Authorized
 
-| Method | Url                | Description               |
-| ------ | ------------------ | ------------------------- |
-| GET    | /api/listFilms     | Get list films with limit |
-| GET    | api/getFilmPage    | See film page             |
-| GET    | api/search         | Search on name film       |
-| PUT    | api/estimateFilm   | Estimate film (x)         |
-| POST   | api/addNewBookmark | Add in bookmark (x)       |
-| POST   | api/addNewFavorite | Add in favorites (x)      |
-| UPDATE | api/updateUserData | Update data about me (x)  |
-| POST   | api/writeComment   | Write comment (x)         |
+| Method | Url                 | Description               |
+| ------ | ------------------- | ------------------------- |
+| GET    | /api/listFilms      | Get list films with limit |
+| GET    | /api/getFilmPage    | See film page             |
+| GET    | /api/search         | Search on name film       |
+| PUT    | /api/estimateFilm   | Estimate film (x)         |
+| POST   | /api/addNewBookmark | Add in bookmark (x)       |
+| POST   | /api/addNewFavorite | Add in favorites (x)      |
+| PUT    | /api/updateUserData | Update data about me (x)  |
+| POST   | /api/writeComment   | Write comment (x)         |
+| POST   | /api/addNewManager  | Add new manager (x)       |
+| POST   | /api/addNewKino     | Add new film (x)          |
