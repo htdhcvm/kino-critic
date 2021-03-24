@@ -1,16 +1,33 @@
-const { v4: uuidv4 } = require('uuid');
-const timeNow = require('../../common/timeNow');
+const Sequelize = require('sequelize');
 
-class RefreshSession {
-    constructor({ userId, ip, expiresIn, userAgent, createAt }) {
-        this.refreshToken = uuidv4();
-        this.userId = userId;
-        this.fingerprint = uuidv4();
-        this.ip = ip;
-        this.expiresIn = expiresIn;
-        this.userAgent = userAgent;
-        this.createAt = timeNow();
-    }
-}
-
-module.exports = RefreshSession;
+module.exports = sequelize.define('refreshsessions', {
+    id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    refreshtoken: {
+        type: Sequelize.UUID,
+        allowNull: false,
+    },
+    user_agent: {
+        type: Sequelize.STRING(200),
+        allowNull: false,
+    },
+    fingerprint: {
+        type: Sequelize.STRING(200),
+        allowNull: false,
+    },
+    ip: {
+        type: Sequelize.STRING(15),
+        allowNull: false,
+    },
+    expiresin: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+    },
+    id_user: Sequelize.INTEGER(11),
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE,
+});

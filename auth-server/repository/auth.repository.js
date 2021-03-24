@@ -1,6 +1,9 @@
-const { response } = require('../app');
-const RefreshSessionEntity = require('../model/Entity/RefreshSession');
+const { QueryTypes } = require('sequelize');
+
 const UserEntity = require('../model/Entity/User');
+const RefreshSessionEntity = require('../model/Entity/RefreshSession');
+
+const UserEntityToDto = require('../model/Mappers/UserToDTO');
 
 class AuthRepository {
     constructor(client) {
@@ -10,55 +13,47 @@ class AuthRepository {
     async getByLogin(login) {
         let responseDb = {};
 
-        try {
-            responseDb = await this.client.query(
-                'SELECT id, login, password FROM users where login = $1',
-                [login],
-            );
-        } catch (error) {
-            throw error;
-        }
-        // console.log(responseDb);
-        if (responseDb.rowCount === 0) return {};
+        const user = await UserEntity.findAll({
+            where: {
+                login: login,
+            },
+        }).catch(e => console.log(e));
 
-        const user = responseDb.rows[0];
-        return user.rowCount === 0
-            ? []
-            : new UserEntity(user.id, user.login, user.password);
+        if (user.length === 0) return [];
+
+        return UserEntityToDto(user[0].dataValues);
     }
 
     async getUserById(id_user) {
-        const responseDb = await this.client.query(
-            `
-            SELECT * FROM users WHERE id = $1 
-        `,
-            [id_user],
-        );
+        const responseDb = await UserEntity.findAll({
+            where: {
+                id: id_user,
+            },
+        });
 
-        if (responseDb.rowCount === 0) return {};
+        const user = responseDb[0].dataValues;
 
-        const user = responseDb.rows[0];
-
-        return new UserEntity(user.id, user.login, user.password);
+        return UserEntityToDto(user);
     }
 
     async getCountRefreshForUser(userId) {
-        const responseDb = await this.client.query(
-            `SELECT COUNT(id) as refreshCount FROM refreshsessions WHERE id_user = $1`,
-            ['' + userId],
-        );
+        console.log(userId);
 
-        return responseDb.rows[0].refreshcount;
+        const responseDb = await RefreshSessionEntity.count({
+            where: {
+                id_user: userId,
+            },
+        });
+
+        return responseDb;
     }
 
     async clearAllUserRefreshSession(userId) {
-        // console.log(userId);
-        const responseDb = await this.client.query(
-            `
-            DELETE FROM refreshsessions WHERE id_user = $1
-        `,
-            ['' + userId],
-        );
+        await RefreshSessionEntity.destroy({
+            where: {
+                id_user: userId,
+            },
+        });
     }
 
     async addNewRefreshSession(
@@ -75,38 +70,49 @@ class AuthRepository {
     }
 
     async getByRefreshToken(refreshToken) {
-        let responseDb = await this.client.query(
-            `
-            SELECT * FROM refreshsessions WHERE refreshtoken = $1
-        `,
-            [refreshToken],
-        );
+        const responseDb = await RefreshSessionEntity.findAll({
+            where: {
+                refreshtoken: refreshToken,
+            },
+        });
+        // let responseDb = await this.client.query(
+        //     `
+        //     SELECT * FROM refreshsessions WHERE refreshtoken = $1
+        // `,
+        //     [refreshToken],
+        // );
 
-        return responseDb.rows[0];
+        return responseDb[0].dataValues;
     }
 
     async deleteWhereRefreshToken(refreshToken) {
-        let responseDb = await this.client.query(
-            `DELETE FROM refreshsessions WHERE refreshtoken = $1`,
-            [refreshToken],
-        );
-
-        return responseDb.rowCount > 0 ? true : false;
+        await RefreshSessionEntity.destroy({
+            where: {
+                refreshtoken: refreshToken,
+            },
+        });
     }
 
     async getUserOnRefreshToken(refreshToken) {
-        let responseDb = await this.client.query(
-            `
-            SELECT * FROM users WHERE id = ( SELECT id_user FROM refreshsessions WHERE refreshtoken = $1);
-        `,
-            [refreshToken],
+        const users = await sequelize.query(
+            'SELECT id_user FROM refreshsessions WHERE refreshtoken = :refreshToken',
+            {
+                replacements: { refreshToken: refreshToken },
+                type: QueryTypes.SELECT,
+            },
         );
 
-        if (responseDb.rowCount === 0) return {};
+        const responseDb = await UserEntity.findAll({
+            where: {
+                id: users[0].id_user,
+            },
+        });
 
-        const user = responseDb.rows[0];
+        if (responseDb[0].dataValues.length === 0) return {};
 
-        return new UserEntity(user.id, user.login, user.password);
+        const user = responseDb[0].dataValues;
+
+        return UserEntityToDto(user);
     }
 }
 
