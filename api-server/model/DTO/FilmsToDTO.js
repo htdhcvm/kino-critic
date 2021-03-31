@@ -1,0 +1,37 @@
+module.exports = films => {
+    return films.map(film => {
+        return {
+            id: film.dataValues.id,
+            title: film.dataValues.title,
+            review: film.dataValues.review,
+            photo: film.dataValues.photo,
+            rating: film.dataValues.rating,
+            views: film.dataValues.views,
+            year: film.dataValues.year,
+            city: film.dataValues.city,
+            genre: film.dataValues.genre,
+            slogan: film.dataValues.slogan,
+            director: film.dataValues.director,
+            scenario: film.dataValues.scenario,
+            producer: film.dataValues.producer,
+            operator: film.dataValues.operator,
+            composer: film.dataValues.composer,
+            painter: film.dataValues.painter,
+            mounting: film.dataValues.mounting,
+            budget: film.dataValues.budget,
+            feesus: film.dataValues.feesus,
+            feesworld: film.dataValues.feesworld,
+            watchers: film.dataValues.watchers,
+            premiererf: film.dataValues.premiererf,
+            premiereworld: film.dataValues.premiereworld,
+            releaserf: film.dataValues.releaserf,
+            releasedvd: film.dataValues.releasedvd,
+            age: film.dataValues.age,
+            reitingmpaa: film.dataValues.reitingmpaa,
+            time: film.dataValues.time,
+            estimate: film.dataValues.estimate,
+            id_user: film.dataValues.id_user,
+            createdAt: film.dataValues.createdAt,
+        };
+    });
+};
