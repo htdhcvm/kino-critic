@@ -1,0 +1,528 @@
+{
+	"info": {
+		"_postman_id": "fce61c9f-e17c-f5b3-2684-31ba21c38ea0",
+		"name": "kino-critic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"login\" : \"user_1\",\n\t\"password\" : \"123\"\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:3005/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refreshtokens",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accessToken\" : \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTY1NzQxMjIsImV4cCI6MTYxNjU3NDQyMiwic3ViIjoiMSJ9.tb-ZNMqata-Y8igicqoSX8P6QYQu6QjfxbKCRlkc7AbDXa0GYzi4zvMJogXl6SOlHuiiPoz7_iQDVzqusIWknA\",\n    \"fingerPrint\" : \"d844f171-331b-42ff-93c1-68d11fc1a9be\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3005/refresh-tokens",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"refresh-tokens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accessToken\" : \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTUzMDg5NDMsImV4cCI6MTYxNTMwOTI0Mywic3ViIjoiMyJ9.heG3RCFE7Xf5NdpPyuERk8hjG1PMwVLeqJwdnS7HrTCMq7t5KQvP_V6hlH1wgNRrxsc4ATWHd1fLCwJDsN_J-g\",\n    \"fingerPrint\" : \"ac908f45-ddfd-4932-a9c7-21e3903c050e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3005/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3005",
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "visitor",
+					"item": [
+						{
+							"name": "getFilmPage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/getFilmPage/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"getFilmPage",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listFilms",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/listFilms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"listFilms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/search/л",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"л"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "addNewManager(x)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcxMTQ2NTEsImV4cCI6MTYxNzExNjQ1MSwic3ViIjoiMSJ9._z79b3K5kX_ekocY1uqb6TTERt5-NhK1bolJpmcwiXgtKaJT79347g-CAwVPrPebWsteDcq7PsnIwjkiyIJxow\",\n    \"login\" :\"manager_3\",     \n    \"password\" :\"manager_3\",  \n    \"age\" : 26,       \n    \"fio\" : \"c Nellie Kling\",       \n    \"address\" :\"CINorth Hassan\",  \n    \"typeUser\" : 1,\n    \"number\": \"(569) 941-2412 x7062\",      \n    \"format\": \"!##-!##-####\",       \n    \"numberFormat\": \"310-524-5267\"\n      \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/addNewManager",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"addNewManager"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "manager",
+					"item": [
+						{
+							"name": "addNewKino(x)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\" : \"test\",\n    \"review\" : \"test\", \n    \"photo\" : \"test\", \n    \"rating\" : \"test\", \n    \"views\" : \"test\", \n    \"year\" : \"test\", \n    \"city\" : \"test\",\n    \"genre\" : \"test\",\n    \"slogan\" : \"test\", \n    \"director\" : \"test\",\n    \"scenario\" : \"test\",\n    \"producer\" : \"test\", \n    \"operator\" : \"test\", \n    \"composer\" : \"test\",\n    \"painter\" : \"test\", \n    \"mounting\" : \"test\", \n    \"budget\" : \"test\",\n    \"feesus\" : \"test\",\n    \"feesworld\" : \"test\",\n    \"watchers\" : \"test\", \n    \"premiererf\" : \"test\", \n    \"premiereworld\" : \"test\",\n    \"releaserf\" : \"test\", \n    \"releasedvd\" : \"test\",\n    \"age\" : \"test\", \n    \"reitingmpaa\" : \"test\", \n    \"time\" : \"test\",\n    \"usersKinoId\" : 1,\n    \"estimate\" : 0, \n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcxMjgxMDksImV4cCI6MTYxNzEyOTkwOSwic3ViIjoiMSJ9.UV-EsLmfDjzRe97wiUzOM0ZK909I8xhFyQuezRm6yAo9CZ2P-Pj6iHQJRsxhZR6h-mOQUmF_CnJfFWpp41rZFg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/addNewKino",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"addNewKino"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "getFavorites(x)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcyMTEzMDMsImV4cCI6MTYxNzIxMzEwMywic3ViIjoiMSJ9.7o6U58QHW6dqNM3XhGr2h6iDH6lWuHh2bYTPt6wQmrHbVpmP6qWXpCypvMKFMo9CbqApTBhqS6kVpAIgwkxvzg\",\n    \"id_user\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/getFavorites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"getFavorites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getBookmarks(x)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcyMTEzMDMsImV4cCI6MTYxNzIxMzEwMywic3ViIjoiMSJ9.7o6U58QHW6dqNM3XhGr2h6iDH6lWuHh2bYTPt6wQmrHbVpmP6qWXpCypvMKFMo9CbqApTBhqS6kVpAIgwkxvzg\",\n    \"id_user\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/getBookmarks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"getBookmarks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addNewFavorite(x) -",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcyMTQ4NzIsImV4cCI6MTYxNzIxNjY3Miwic3ViIjoiMSJ9.W461GiG9c9kEYjESR86yFKxmhmzwvabnkhHZ2p0pqsAgnycV4DuXxl7P9d63IcAcv9UYVrbpDSPWiCcbCkhrmQ\",\n    \"id_user\" : 1,\n    \"id_kino\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/addNewFavorite",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"addNewFavorite"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addNewBookmark(x) - ",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcyMTQ4NzIsImV4cCI6MTYxNzIxNjY3Miwic3ViIjoiMSJ9.W461GiG9c9kEYjESR86yFKxmhmzwvabnkhHZ2p0pqsAgnycV4DuXxl7P9d63IcAcv9UYVrbpDSPWiCcbCkhrmQ\",\n    \"id_user\" : 1,\n    \"id_kino\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/addNewBookmark",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"addNewBookmark"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteFavorites(x)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcyMTMwNDMsImV4cCI6MTYxNzIxNDg0Mywic3ViIjoiMSJ9.Y8MqUYnTospGQyuTc_ocb0J8A-4phiw2ZqQKTL7CqOjWTQaF2bZna6FiBGF6wiCyVakqwRva8graS0RTP24CwA\",\n    \"id_user\" : 2,\n    \"id_kino\" : 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/deleteFavorites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"deleteFavorites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteBookmarks(x)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcyMTMwNDMsImV4cCI6MTYxNzIxNDg0Mywic3ViIjoiMSJ9.Y8MqUYnTospGQyuTc_ocb0J8A-4phiw2ZqQKTL7CqOjWTQaF2bZna6FiBGF6wiCyVakqwRva8graS0RTP24CwA\",\n    \"id_user\" : 2,\n    \"id_kino\" : 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/deleteBookmarks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"deleteBookmarks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateUserData(x)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcyMDU0OTcsImV4cCI6MTYxNzIwNzI5Nywic3ViIjoiMSJ9.9lAo5UAI8RzQqXetei5nP7rivgXVAkCRlKOgeu9bH1ZaeafQS7G9zY_6TS5YdC6D7USWPrXvNpeUd0EzQiY2SQ\",\n    \"id\" : 1,\n    \"login\" :\"user_1\",     \n    \"password\" :\"123\",  \n    \"age\" : 31,       \n    \"fio\" : \"c Nellie Kling\",       \n    \"address\" :\"CINorth Hassan\",  \n    \"number\": \"(568) 941-2412 x7062\",      \n    \"format\": \"!##-!##-####\",       \n    \"numberFormat\": \"310-524-5267\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/updateUserData",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"updateUserData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "writeComment(x) - ",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcyMTEzMDMsImV4cCI6MTYxNzIxMzEwMywic3ViIjoiMSJ9.7o6U58QHW6dqNM3XhGr2h6iDH6lWuHh2bYTPt6wQmrHbVpmP6qWXpCypvMKFMo9CbqApTBhqS6kVpAIgwkxvzg\",\n    \"id_kino\" : 1,\n    \"id_user\" : 1,\n    \"text_comment\" : \"awd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/writeComment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"writeComment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "estimateFilm(x)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"estimate\" : \"1\",\n    \"id_film\" : \"1\",\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzcyI6ImF1dGgiLCJpYXQiOjE2MTcyMDU0OTcsImV4cCI6MTYxNzIwNzI5Nywic3ViIjoiMSJ9.9lAo5UAI8RzQqXetei5nP7rivgXVAkCRlKOgeu9bH1ZaeafQS7G9zY_6TS5YdC6D7USWPrXvNpeUd0EzQiY2SQ\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/estimateFilm",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"estimateFilm"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
