@@ -1,16 +1,55 @@
 const router = require('express').Router();
 
-const UserController = require('../controllers/user.controler');
+const checkOnAccess = require('../middleware/checkOnAccess');
 
-const userController = new UserController();
+const userController = require('./injectionDependencies/user');
 
-router.get('/listFilms', userController.listFilms);
-router.get('/getFilmPage', userController.getFilmPage);
-router.get('/search', userController.search);
-router.put('/estimateFilm', userController.estimateFilm);
-router.post('/addNewBookmark', userController.addNewBookmark);
-router.post('/addNewFavorite', userController.addNewFavorite);
-router.put('/updateUserData', userController.updateUserData);
-router.post('/writeComment', userController.writeComment);
+router.put(
+    '/estimateFilm',
+    checkOnAccess,
+    userController.estimateFilm.bind(userController),
+);
+router.put(
+    '/updateUserData',
+    checkOnAccess,
+    userController.updateUserData.bind(userController),
+);
+router.post(
+    '/writeComment',
+    checkOnAccess,
+    userController.writeComment.bind(userController),
+);
+
+router.get(
+    '/getFavorites',
+    checkOnAccess,
+    userController.getFavorites.bind(userController),
+);
+router.get(
+    '/getBookmarks',
+    checkOnAccess,
+    userController.getBookmarks.bind(userController),
+);
+router.post(
+    '/addNewBookmark',
+    checkOnAccess,
+    userController.addNewBookmark.bind(userController),
+);
+router.post(
+    '/addNewFavorite',
+    checkOnAccess,
+    userController.addNewFavorite.bind(userController),
+);
+
+router.post(
+    '/deleteFavorites',
+    checkOnAccess,
+    userController.deleteFavorites.bind(userController),
+);
+router.post(
+    '/deleteBookmarks',
+    checkOnAccess,
+    userController.deleteBookmarks.bind(userController),
+);
 
 module.exports = router;

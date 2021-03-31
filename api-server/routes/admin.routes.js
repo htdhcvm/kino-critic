@@ -1,5 +1,12 @@
 const router = require('express').Router();
 
-router.post('/addNewManager', (req, res) => {});
+const adminController = require('./injectionDependencies/admin');
+const checkOnAccess = require('../middleware/checkOnAccess');
+
+router.post(
+    '/addNewManager',
+    checkOnAccess,
+    adminController.addNewManager.bind(adminController),
+);
 
 module.exports = router;
