@@ -17,12 +17,26 @@ module.exports = {
                 type: Sequelize.STRING(255),
                 allowNull: false,
             },
+            age: {
+                type: Sequelize.STRING(3),
+            },
+            fio: {
+                type: Sequelize.STRING(50),
+            },
+            address: {
+                type: Sequelize.STRING(50),
+            },
+            typeUser: {
+                type: Sequelize.INTEGER(1),
+            },
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE,
         });
     },
 
     down: async (queryInterface, Sequelize) => {
+        await queryInterface.removeColumn('kinos', 'usersKinoId');
+
         return queryInterface.dropTable('users_kinos');
     },
 };
