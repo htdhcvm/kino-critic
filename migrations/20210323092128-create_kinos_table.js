@@ -117,7 +117,12 @@ module.exports = {
                 type: Sequelize.STRING(255),
                 allowNull: false,
             },
-            id_user: Sequelize.INTEGER(11),
+            estimate: {
+                type: Sequelize.FLOAT(2, 1),
+                allowNull: false,
+            },
+            usersKinoId: Sequelize.INTEGER(11),
+            commentId: Sequelize.INTEGER(11),
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE,
         });
