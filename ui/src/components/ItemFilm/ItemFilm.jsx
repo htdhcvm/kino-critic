@@ -1,11 +1,15 @@
 import React from 'react';
 
-const ItemFilm = ({ image, title }) => {
+import { Link } from 'react-router-dom';
+
+const ItemFilm = ({ image, title, id }) => {
     return (
-        <div className="ItemFilm">
-            <img src={image} />
-            {title}
-        </div>
+        <Link to={`/kino-page/${id}`}>
+            <div className="ItemFilm">
+                <img src={`data:image/jpeg;base64, ${image}`} />
+                {title}
+            </div>
+        </Link>
     );
 };
 

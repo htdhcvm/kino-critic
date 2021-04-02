@@ -16,7 +16,7 @@ class UserService {
     }
 
     async writeComment(commentData) {
-        await this.userRepository.writeComment(commentData);
+        return await this.userRepository.writeComment(commentData);
     }
 
     async getListDiary(favorites) {

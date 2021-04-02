@@ -4,6 +4,7 @@ const joinFavoritesAndOwnersDTO = require('../model/DTO/ToClient/joinFavoritesOw
 const fromPrimitiveToCommentDTO = require('../model/DTO/FromPrimitive/FromPrimitiveToCommentDTO');
 const fromPrimitiveToDTODiaryDelete = require('../model/DTO/FromPrimitive/FromPrimitiveToDTODiaryDelete');
 const fromPrimitiveToDTODiaryAdd = require('../model/DTO/FromPrimitive/FromPrimitiveToDTODiaryAdd');
+const getIdUserFromAccessToken = require('../helpers/getIdUserFromAccessToken');
 
 class UserController {
     constructor(userService) {
@@ -65,14 +66,15 @@ class UserController {
 
     async writeComment(req, res) {
         try {
-            const { id_kino, text_comment, id_user } = req.body;
-            console.log(id_kino, text_comment, id_user);
+            const { id_kino, text_comment, accessToken } = req.body;
 
-            await this.userService.writeComment(
+            const id_user = await getIdUserFromAccessToken(accessToken);
+
+            const comment = await this.userService.writeComment(
                 fromPrimitiveToCommentDTO(id_kino, text_comment, id_user),
             );
 
-            res.sendStatus(200);
+            res.json(comment);
         } catch (error) {
             console.log(error);
             res.sendStatus(500);

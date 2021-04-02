@@ -20,4 +20,15 @@ router.get(
     streamDataToClient,
 );
 
+router.get(
+    '/getCommentsPost/:id',
+    visitorController.getCommentsPost.bind(visitorController),
+    streamDataToClient,
+);
+
+router.post(
+    '/registration',
+    visitorController.registration.bind(visitorController),
+);
+
 module.exports = router;

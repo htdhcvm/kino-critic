@@ -11,10 +11,10 @@ const authRepository = new AuthRepository(dbConnect);
 const authService = new AuthService(authRepository);
 const authController = new AuthController(authService);
 
-router.post('/login', authController.login.bind(authController));
-router.post('/logout', authController.logout.bind(authController));
+router.post('/auth/login', authController.login.bind(authController));
+router.post('/auth/logout', authController.logout.bind(authController));
 router.post(
-    '/refresh-tokens',
+    '/auth/refresh-tokens',
     authController.refreshtokens.bind(authController),
 );
 

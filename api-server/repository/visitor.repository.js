@@ -1,11 +1,17 @@
 const { Op } = require('sequelize');
 const userHasFilmsToDTO = require('../model/DTO/UserHasFilmsToDTO');
 const FilmToDTO = require('../model/DTO/FilmToDTO');
-const FilmsToDTO = require('../model/DTO/FilmsToDTO');
+const listCommentsToDTO = require('../model/DTO/ToClient/ListCommentsToDTO');
+
 class VisitorRepository {
-    constructor(userModelWithVisitorRole, filmsModelWithVisitorRole) {
+    constructor(
+        userModelWithVisitorRole,
+        filmsModelWithVisitorRole,
+        commentsModelWithVisitorRole,
+    ) {
         this.userModelWithVisitorRole = userModelWithVisitorRole;
         this.filmsModelWithVisitorRole = filmsModelWithVisitorRole;
+        this.commentsModelWithVisitorRole = commentsModelWithVisitorRole;
     }
 
     async getListFilms() {
@@ -45,6 +51,36 @@ class VisitorRepository {
         });
 
         return userHasFilmsToDTO(userHasFilms);
+    }
+
+    async checkOnExistUser(login) {
+        const responseDb = await this.userModelWithVisitorRole.findAll({
+            where: {
+                login,
+                typeUser: 0,
+            },
+        });
+
+        return responseDb.length === 0;
+    }
+
+    async addNewUser(login, password) {
+        await this.userModelWithVisitorRole.create({
+            login,
+            password,
+            typeUser: 0,
+        });
+    }
+
+    async getCommentsPost(id) {
+        const responseDb = await this.commentsModelWithVisitorRole.findAll({
+            where: {
+                kinoId: id,
+            },
+            include: this.userModelWithVisitorRole,
+        });
+
+        return listCommentsToDTO(responseDb);
     }
 }
 

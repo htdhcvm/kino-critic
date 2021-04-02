@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './KinoList.scss';
 
 import ItemFilm from '../ItemFilm/ItemFilm';
-
 import Header from '../Header/Header';
-import img from '../../../assets/ezgif-3-f6d1d3a74aff.jpg';
 
 import { requestGetAllPosts } from '@features/postsSlice';
 
@@ -14,17 +12,23 @@ const KinoList = () => {
     const dispatch = useDispatch();
 
     const posts = useSelector(state => state.posts);
-    useEffect(() => {
-        dispatch(requestGetAllPosts);
-    }, []);
+    const isAuth = useSelector(state => state.user.authState);
 
-    // console.log(posts.map(() => {}));
+    useEffect(() => {
+        return dispatch(requestGetAllPosts);
+    }, [isAuth]);
+
     return (
         <div className="kinoList">
             <Header />
             <div className="list">
                 {posts.map(post => (
-                    <ItemFilm image={img} title={post.name} key={post.id} />
+                    <ItemFilm
+                        image={post.film.photo}
+                        title={post.film.title}
+                        key={post.film.id}
+                        id={post.film.id}
+                    />
                 ))}
             </div>
         </div>

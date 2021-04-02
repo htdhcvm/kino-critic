@@ -15,6 +15,14 @@ app.use(
     }),
 );
 
+app.use(
+    '/auth',
+    createProxyMiddleware({
+        target: 'http://localhost:3005/',
+        changeOrigin: true,
+    }),
+);
+
 if (process.env.NODE_ENV === 'production') {
     app.get('*', (req, res) => {
         Router.match(

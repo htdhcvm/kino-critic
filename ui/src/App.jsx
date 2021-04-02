@@ -5,13 +5,13 @@ import './App.scss';
 
 import Authorization from './components/Authorization/Authorization';
 import KinoList from './components/KinoList/KinoList';
-import KinoPage from './components/KinoPage/KinoPage';
 import Registration from './components/Registration/Registration';
 import NotMatch from './components/NotMatch/NotMatch';
 import SignInManager from './components/SignInManager/SignInManager';
-
 import Admin from './components/Admin/Admin';
 import Manager from './components/Manager/Manager';
+import IsAuthRoute from './components/IsAuthRoute/IsAuthRoute';
+import CheckOnAuth from './components/CheckOnAuth/CheckOnAuth';
 
 const App = () => {
     return (
@@ -26,15 +26,17 @@ const App = () => {
                 <Route path="/sign-in-for-manegers">
                     <SignInManager />
                 </Route>
-                <Route path="/registration">
-                    <Registration />
-                </Route>
-                <Route path="/kino-page/:id" exact>
+                {/* <Route path="/kino-page/:id" exact>
                     <KinoPage />
-                </Route>
-                <Route path="/authorization">
+                </Route> */}
+                <CheckOnAuth path="/kino-page/:id" exact />
+
+                <IsAuthRoute path="/registration">
+                    <Registration />
+                </IsAuthRoute>
+                <IsAuthRoute path="/authorization">
                     <Authorization />
-                </Route>
+                </IsAuthRoute>
                 <Route path="/" exact>
                     <KinoList />
                 </Route>

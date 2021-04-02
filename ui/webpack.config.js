@@ -16,6 +16,7 @@ module.exports = {
         alias: {
             '@axios': path.resolve(__dirname, 'helpers/axiosService'),
             '@features': path.resolve(__dirname, 'src/features'),
+            '@assets': path.resolve(__dirname, 'assets'),
         },
     },
     module: {

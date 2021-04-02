@@ -4,6 +4,7 @@ class AuthController {
     }
 
     async login(req, res, next) {
+        console.log('login');
         /*
             Входные данные 
             login, password
@@ -17,7 +18,7 @@ class AuthController {
             Set-Cookie: refreshToken=''; HttpOnly // для браузера
 
         */
-        const { login, password } = req.body;
+        const { login, password, fingerprint } = req.body;
 
         const refreshSessionData = {
             ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -37,6 +38,7 @@ class AuthController {
         const resultIssue = await this.authService.issuePairToken(
             refreshSessionData,
             result.userDTO,
+            fingerprint,
         );
 
         res.cookie('refreshToken', resultIssue.refreshToken, {

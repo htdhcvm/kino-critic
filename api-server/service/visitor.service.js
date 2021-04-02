@@ -2,6 +2,7 @@ const fs = require('fs');
 const ListFilmsToDTOFilmsWithPhoto = require('../model/DTO/ListFilmsToDTOFilmsWithPhoto');
 const ListUserFilmsToCline = require('../model/DTO/ToClient/ListUserFilmsToCline');
 const FilmToDTOWithPhoto = require('../model/DTO/ToClient/FilmToDTOWithPhoto');
+const getHash = require('../helpers/getHash');
 
 class VisitorService {
     constructor(visitorRepository) {
@@ -15,25 +16,39 @@ class VisitorService {
     async filmsListsWithBase64Photo(usersHasManyFilms) {
         const lists = usersHasManyFilms.map(async userHasFilms => {
             const tmp = userHasFilms.films.map(film => {
-                let tmp = '';
-                const src = fs.createReadStream(
+                // let tmp = '';
+                // const src = fs.createReadStream(
+                //     `${__dirname}/../fileStores/${film.photo}`,
+                // );
+
+                // src.on('data', chunk => {
+                //     tmp += Buffer.from(chunk).toString('base64');
+                // });
+
+                // return new Promise(resolve => {
+                //     src.on('end', () => {
+                //         resolve(
+                //             ListFilmsToDTOFilmsWithPhoto(
+                //                 userHasFilms.fio,
+                //                 film,
+                //                 tmp,
+                //             ),
+                //         );
+                //     });
+                // });
+
+                const bitmap = fs.readFileSync(
                     `${__dirname}/../fileStores/${film.photo}`,
                 );
 
-                src.on('data', chunk => {
-                    tmp += Buffer.from(chunk).toString('base64');
-                });
-
                 return new Promise(resolve => {
-                    src.on('end', () => {
-                        resolve(
-                            ListFilmsToDTOFilmsWithPhoto(
-                                userHasFilms.fio,
-                                film,
-                                tmp,
-                            ),
-                        );
-                    });
+                    resolve(
+                        ListFilmsToDTOFilmsWithPhoto(
+                            userHasFilms.fio,
+                            film,
+                            Buffer.from(bitmap).toString('base64'),
+                        ),
+                    );
                 });
             });
 
@@ -60,22 +75,36 @@ class VisitorService {
         const createBase64 = photo => {
             let tmp = '';
 
-            const src = fs.createReadStream(
-                `${__dirname}/../fileStores/${photo}`,
+            // const src = fs.createReadStream(
+            //     `${__dirname}/../fileStores/${photo}`,
+            // );
+
+            // src.on('data', chunk => {
+            //     tmp += Buffer.from(chunk).toString('base64');
+            // });
+
+            const bitmap = fs.readFileSync(
+                `${__dirname}/../fileStores/${film.photo}`,
             );
 
-            src.on('data', chunk => {
-                tmp += Buffer.from(chunk).toString('base64');
-            });
-
             return new Promise(resolve => {
-                src.on('end', () => {
-                    resolve(tmp);
-                });
+                resolve(Buffer.from(bitmap).toString('base64'));
             });
         };
 
         return FilmToDTOWithPhoto(film, await createBase64(film.photo));
+    }
+
+    async checkOnExistUser(login) {
+        return await this.visitorRepository.checkOnExistUser(login);
+    }
+
+    async addNewUser(login, password) {
+        await this.visitorRepository.addNewUser(login, await getHash(password));
+    }
+
+    async getCommentsPost(id) {
+        return await this.visitorRepository.getCommentsPost(id);
     }
 }
 

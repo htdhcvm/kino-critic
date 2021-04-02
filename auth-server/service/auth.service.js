@@ -37,7 +37,7 @@ class AuthService {
             : { status: false, text: 'Invalid user data' };
     }
 
-    async issuePairToken(refreshSessionData, userDTO) {
+    async issuePairToken(refreshSessionData, userDTO, fingerprint) {
         const expiresIn = new Date().getTime() + process.env.JWT_EXPIRE_SESSION;
 
         const countRefreshesOnIdUser = await this.authRepository.getCountRefreshForUser(
@@ -52,7 +52,7 @@ class AuthService {
             await RefreshSessionEntity.create({
                 user_agent: refreshSessionData.userAgent,
                 refreshtoken: uuidv4(),
-                fingerprint: uuidv4(),
+                fingerprint: fingerprint,
                 ip: refreshSessionData.ip,
                 expiresin: expiresIn,
                 id_user: userDTO.id,
@@ -106,7 +106,7 @@ class AuthService {
                 await RefreshSessionEntity.create({
                     user_agent: refreshSessionData.userAgent,
                     refreshtoken: uuidv4(),
-                    fingerprint: uuidv4(),
+                    fingerprint: fingerPrint,
                     ip: refreshSessionData.ip,
                     expiresin: expiresIn,
                     id_user: user.id,

@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo/logo-red.png';
-
-import backgroun from '../../../assets/background.jpg';
 
 const BackgroupSignPages = ({ form }) => {
     return (
         <div className="background">
-            <img className="logo" src={logo} />
+            <Link to="/">
+                <img className="logo" src={logo} />
+            </Link>
             {form}
         </div>
     );

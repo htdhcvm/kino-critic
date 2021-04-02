@@ -22,14 +22,13 @@ module.exports = {
                 allowNull: false,
             },
             ip: {
-                type: Sequelize.STRING(15),
+                type: Sequelize.STRING(50),
                 allowNull: false,
             },
             expiresin: {
                 type: Sequelize.STRING(255),
                 allowNull: false,
             },
-
             id_user: Sequelize.INTEGER(11),
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE,

@@ -16,7 +16,6 @@ const SignInManager = () => {
                     <div className="from-group">
                         <TextField
                             className="max-width"
-                            id="outlined-basic"
                             label="Login"
                             variant="outlined"
                         />
@@ -24,7 +23,6 @@ const SignInManager = () => {
                     <div className="from-group">
                         <TextField
                             className="max-width"
-                            id="outlined-basic"
                             label="Password"
                             variant="outlined"
                             type="password"

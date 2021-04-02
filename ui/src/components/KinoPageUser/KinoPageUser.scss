@@ -1,12 +1,16 @@
-.kinoPage {
+.KinoPageUser {
     padding: 20px 40px;
     .body-kino {
         display: grid;
         grid-template-areas: 'photo mainContent rating';
         grid-gap: 30px;
+        margin-top: 40px;
 
         .photo {
             grid-area: photo;
+            .kino-image {
+                max-width: 600px;
+            }
         }
         .main-content {
             grid-area: mainContent;
@@ -29,6 +33,14 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                .star {
+                    display: flex;
+                    align-items: center;
+                    flex: 1;
+                    .estimate {
+                        margin-left: 20px;
+                    }
+                }
             }
         }
 

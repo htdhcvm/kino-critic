@@ -20,7 +20,7 @@ module.exports = sequelize.define('refreshsessions', {
         allowNull: false,
     },
     ip: {
-        type: Sequelize.STRING(15),
+        type: Sequelize.STRING(50),
         allowNull: false,
     },
     expiresin: {

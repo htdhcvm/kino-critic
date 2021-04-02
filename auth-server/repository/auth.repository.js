@@ -4,6 +4,7 @@ const UserEntity = require('../model/Entity/User');
 const RefreshSessionEntity = require('../model/Entity/RefreshSession');
 
 const UserEntityToDto = require('../model/Mappers/UserToDTO');
+const { response } = require('express');
 
 class AuthRepository {
     constructor(client) {
@@ -70,17 +71,12 @@ class AuthRepository {
     }
 
     async getByRefreshToken(refreshToken) {
+        console.log(refreshToken);
         const responseDb = await RefreshSessionEntity.findAll({
             where: {
                 refreshtoken: refreshToken,
             },
         });
-        // let responseDb = await this.client.query(
-        //     `
-        //     SELECT * FROM refreshsessions WHERE refreshtoken = $1
-        // `,
-        //     [refreshToken],
-        // );
 
         return responseDb[0].dataValues;
     }

@@ -5,9 +5,16 @@ const url =
         ? 'http://localhost:3001'
         : 'http://localhost:3000';
 
-const axiosInstance = axios.create({
+const axiosInstanceVisitor = axios.create({
     baseURL: url,
     timeout: 3000,
 });
 
-export default axiosInstance;
+const axiosInstanceUser = axios.create({
+    baseURL: url,
+    timeout: 3000,
+});
+
+axiosInstanceUser.defaults.withCredentials = true;
+
+export { axiosInstanceVisitor, axiosInstanceUser };

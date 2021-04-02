@@ -22,6 +22,9 @@ module.exports = () => {
         through: 'comments',
     });
 
+    userModelWithVisitorRole.hasMany(commentsModelWithVisitorRole);
+    commentsModelWithVisitorRole.belongsTo(userModelWithVisitorRole);
+
     return {
         filmsModelWithVisitorRole,
         userModelWithVisitorRole,

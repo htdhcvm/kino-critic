@@ -1,5 +1,6 @@
 const filmsDiaryToDTO = require('../model/DTO/FilmsDiaryToDTO');
 const toManagerDTO = require('../model/DTO/toManagerDTO');
+const toDTOComment = require('../model/DTO/ToClient/toDTOComment');
 
 class UserRepository {
     constructor(
@@ -17,8 +18,8 @@ class UserRepository {
     }
 
     async estimateFilm(estimate, id_film) {
-        const responseDb = await this.filmsModelWithUserRole.update(
-            { estimate: estimate },
+        const responseDb = await this.filmsModelWithUserRole.increment(
+            { estimate: +estimate },
             {
                 where: {
                     id: id_film,
@@ -96,11 +97,19 @@ class UserRepository {
 
     async writeComment(commentData) {
         const { text, kinoId, usersKinoId } = commentData;
-        await this.commentsModelWithUserRole.create({
+        const responseDbComment = await this.commentsModelWithUserRole.create({
             text,
             kinoId,
             usersKinoId,
         });
+
+        const responseDbUserOnId = await this.userModelWithUserRole.findOne({
+            where: {
+                id: usersKinoId,
+            },
+        });
+
+        return toDTOComment(responseDbComment, responseDbUserOnId);
     }
 
     async deleteDiary(deleteData) {
