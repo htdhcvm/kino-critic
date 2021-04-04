@@ -13,11 +13,16 @@
         align-items: center;
         padding: 5px 15px;
         margin: 0px 20px;
+
         .MuiInputBase-root {
             flex: 1;
         }
+
         .searchIcon {
             cursor: pointer;
         }
     }
+}
+.icons-menu-list {
+    padding-right: 5px;
 }

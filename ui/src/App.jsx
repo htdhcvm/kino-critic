@@ -11,7 +11,10 @@ import SignInManager from './components/SignInManager/SignInManager';
 import Admin from './components/Admin/Admin';
 import Manager from './components/Manager/Manager';
 import IsAuthRoute from './components/IsAuthRoute/IsAuthRoute';
+import CheckOnAuthKinoPage from './components/CheckOnAuthKinoPage/CheckOnAuthKinoPage';
 import CheckOnAuth from './components/CheckOnAuth/CheckOnAuth';
+import Bookmarks from './components/Bookmarks/Bookmarks';
+import Favorites from './components/Favorites/Favorites';
 
 const App = () => {
     return (
@@ -26,11 +29,15 @@ const App = () => {
                 <Route path="/sign-in-for-manegers">
                     <SignInManager />
                 </Route>
-                {/* <Route path="/kino-page/:id" exact>
-                    <KinoPage />
-                </Route> */}
-                <CheckOnAuth path="/kino-page/:id" exact />
 
+                <CheckOnAuth path="/bookmarks">
+                    <Bookmarks />
+                </CheckOnAuth>
+                <CheckOnAuth path="/favorites">
+                    <Favorites />
+                </CheckOnAuth>
+
+                <CheckOnAuthKinoPage path="/kino-page/:id" exact />
                 <IsAuthRoute path="/registration">
                     <Registration />
                 </IsAuthRoute>

@@ -71,7 +71,6 @@ class VisitorService {
     }
 
     async filmWithBase64Photo(film) {
-        console.log(film);
         const createBase64 = photo => {
             let tmp = '';
 

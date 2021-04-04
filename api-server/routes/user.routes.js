@@ -21,12 +21,12 @@ router.post(
 );
 
 router.get(
-    '/getFavorites',
+    '/getFavorites/:accessToken',
     checkOnAccess,
     userController.getFavorites.bind(userController),
 );
 router.get(
-    '/getBookmarks',
+    '/getBookmarks/:accessToken',
     checkOnAccess,
     userController.getBookmarks.bind(userController),
 );
@@ -50,6 +50,12 @@ router.post(
     '/deleteBookmarks',
     checkOnAccess,
     userController.deleteBookmarks.bind(userController),
+);
+
+router.post(
+    '/getDiarysStatus',
+    checkOnAccess,
+    userController.getDiarysStatus.bind(userController),
 );
 
 module.exports = router;

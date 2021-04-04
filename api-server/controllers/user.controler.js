@@ -5,7 +5,7 @@ const fromPrimitiveToCommentDTO = require('../model/DTO/FromPrimitive/FromPrimit
 const fromPrimitiveToDTODiaryDelete = require('../model/DTO/FromPrimitive/FromPrimitiveToDTODiaryDelete');
 const fromPrimitiveToDTODiaryAdd = require('../model/DTO/FromPrimitive/FromPrimitiveToDTODiaryAdd');
 const getIdUserFromAccessToken = require('../helpers/getIdUserFromAccessToken');
-
+const fromPrimitiveToDiaryDTO = require('../model/DTO/FromPrimitive/FromPrimitiveToDiaryDTO');
 class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -15,7 +15,6 @@ class UserController {
         try {
             const { estimate, id_film } = req.body;
 
-            console.log(estimate, id_film);
             const resultEstimate = await this.userService.estimateFilm(
                 estimate,
                 id_film,
@@ -56,7 +55,6 @@ class UserController {
                 }),
             );
 
-            console.log(resultUpdate);
             return res.sendStatus(200);
         } catch (error) {
             console.log(error);
@@ -83,13 +81,14 @@ class UserController {
 
     async getFavorites(req, res) {
         try {
-            const { id_user } = req.body;
+            const { accessToken } = req.params;
+            const id = await getIdUserFromAccessToken(accessToken);
 
             const {
                 diaryLitsts,
                 indexDiaryOwner,
             } = await this.userService.getListDiary(
-                fromPrimitiveToDTODiary(id_user, 1, 0),
+                fromPrimitiveToDTODiary(id, 1, 0),
             );
 
             const listFavoritesWithBase64Photo = await this.userService.filmsListsWithBase64Photo(
@@ -105,6 +104,7 @@ class UserController {
                 owners,
             );
 
+            console.log(favorites);
             res.json(favorites);
         } catch (error) {
             console.log(error);
@@ -114,7 +114,8 @@ class UserController {
 
     async getBookmarks(req, res) {
         try {
-            const { id_user } = req.body;
+            const { accessToken } = req.params;
+            const id_user = await getIdUserFromAccessToken(accessToken);
 
             const {
                 diaryLitsts,
@@ -145,33 +146,41 @@ class UserController {
 
     async addNewBookmark(req, res) {
         try {
-            const { id_user, id_kino } = req.body;
+            const { accessToken, id_kino } = req.body;
+
+            const id_user = await getIdUserFromAccessToken(accessToken);
 
             await this.userService.addNewDiary(
                 fromPrimitiveToDTODiaryAdd(id_user, id_kino, 0),
             );
             res.sendStatus(200);
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         }
     }
 
     async addNewFavorite(req, res) {
         try {
-            const { id_user, id_kino } = req.body;
+            const { accessToken, id_kino } = req.body;
+
+            const id_user = await getIdUserFromAccessToken(accessToken);
 
             await this.userService.addNewDiary(
                 fromPrimitiveToDTODiaryAdd(id_user, id_kino, 1),
             );
             res.sendStatus(200);
         } catch (error) {
+            console.log(error);
             res.sendStatus(500);
         }
     }
 
     async deleteFavorites(req, res) {
         try {
-            const { id_user, id_kino } = req.body;
+            const { accessToken, id_kino } = req.body;
+
+            const id_user = await getIdUserFromAccessToken(accessToken);
 
             await this.userService.deleteDiary(
                 fromPrimitiveToDTODiaryDelete(id_user, id_kino, 1),
@@ -186,13 +195,32 @@ class UserController {
 
     async deleteBookmarks(req, res) {
         try {
-            const { id_user, id_kino } = req.body;
+            const { accessToken, id_kino } = req.body;
+
+            const id_user = await getIdUserFromAccessToken(accessToken);
 
             await this.userService.deleteDiary(
                 fromPrimitiveToDTODiaryDelete(id_user, id_kino, 0),
             );
 
             res.sendStatus(200);
+        } catch (error) {
+            console.log(error);
+            res.sendStatus(500);
+        }
+    }
+
+    async getDiarysStatus(req, res) {
+        try {
+            const { accessToken, id_post } = req.body;
+
+            const id_user = await getIdUserFromAccessToken(accessToken);
+
+            const diarys = await this.userService.getDiarysStatus(
+                fromPrimitiveToDiaryDTO(id_post, id_user),
+            );
+
+            res.json(diarys);
         } catch (error) {
             console.log(error);
             res.sendStatus(500);

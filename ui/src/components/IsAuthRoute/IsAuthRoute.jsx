@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 const IsAuthRoute = ({ children, ...rest }) => {
     const authState = useSelector(state => state.user.authState);
 
+    console.log(authState);
     return (
         <Route
             {...rest}

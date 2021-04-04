@@ -1,0 +1,13 @@
+.Bookmarks {
+    padding: 20px 40px;
+    .bookmarks-wrapper {
+        display: flex;
+        .bookmark-item {
+            width: 150px;
+            margin-right: 20px;
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

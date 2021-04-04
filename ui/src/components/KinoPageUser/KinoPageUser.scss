@@ -9,11 +9,18 @@
         .photo {
             grid-area: photo;
             .kino-image {
-                max-width: 600px;
+                max-width: 400px;
             }
         }
         .main-content {
             grid-area: mainContent;
+            .actionDiaris {
+                display: flex;
+                margin-bottom: 20px;
+                .item {
+                    margin-right: 20px;
+                }
+            }
         }
         .rating {
             grid-area: rating;

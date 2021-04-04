@@ -1,0 +1,13 @@
+.Favorites {
+    padding: 20px 40px;
+    .favorites-wrapper {
+        display: flex;
+        .favorite-item {
+            width: 150px;
+            margin-right: 20px;
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

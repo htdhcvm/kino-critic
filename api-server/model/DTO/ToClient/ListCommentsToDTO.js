@@ -1,6 +1,5 @@
 module.exports = listCommentsFromDb => {
     return listCommentsFromDb.map(comment => {
-        console.log(comment.users_kino);
         return {
             id: comment.id,
             text: comment.text,

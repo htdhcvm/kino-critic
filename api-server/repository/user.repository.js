@@ -1,6 +1,7 @@
 const filmsDiaryToDTO = require('../model/DTO/FilmsDiaryToDTO');
 const toManagerDTO = require('../model/DTO/toManagerDTO');
 const toDTOComment = require('../model/DTO/ToClient/toDTOComment');
+const resultDiresToDTO = require('../model/DTO/ToClient/ResultDiresToDTO');
 
 class UserRepository {
     constructor(
@@ -133,6 +134,19 @@ class UserRepository {
             kinoId,
             usersKinoId,
         });
+    }
+
+    async getDiarysStatus(diaryData) {
+        const { kinoId, usersKinoId } = diaryData;
+
+        const responseDb = await this.userHasKinosWithUserRole.findAll({
+            where: {
+                kinoId,
+                usersKinoId,
+            },
+        });
+
+        return resultDiresToDTO(responseDb);
     }
 }
 

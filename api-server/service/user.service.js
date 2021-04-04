@@ -25,20 +25,28 @@ class UserService {
 
     async filmsListsWithBase64Photo(usersHasManyFilms) {
         const some = usersHasManyFilms.map(film => {
-            let tmp = '';
-            const src = fs.createReadStream(
+            const bitmap = fs.readFileSync(
                 `${__dirname}/../fileStores/${film.photo}`,
             );
 
-            src.on('data', chunk => {
-                tmp += Buffer.from(chunk).toString('base64');
-            });
+            // let tmp = '';
+            // const src = fs.createReadStream(
+            //     `${__dirname}/../fileStores/${film.photo}`,
+            // );
+
+            // src.on('data', chunk => {
+            //     tmp += Buffer.from(chunk).toString('base64');
+            // });
 
             return new Promise(resolve => {
-                console.log(tmp);
-                src.on('end', () => {
-                    resolve(FilmBase64ToDTOFilm(film, tmp));
-                });
+                // src.on('end', () => {
+                resolve(
+                    FilmBase64ToDTOFilm(
+                        film,
+                        Buffer.from(bitmap).toString('base64'),
+                    ),
+                );
+                // });
             });
         });
 
@@ -55,6 +63,10 @@ class UserService {
 
     async addNewDiary(diaryData) {
         await this.userRepository.addNewDiary(diaryData);
+    }
+
+    async getDiarysStatus(diaryData) {
+        return await this.userRepository.getDiarysStatus(diaryData);
     }
 }
 

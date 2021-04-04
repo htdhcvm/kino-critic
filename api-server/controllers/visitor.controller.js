@@ -5,6 +5,7 @@ class VisitorController {
 
     async listFilms(req, res, next) {
         try {
+            console.log('hi');
             const usersHasManyFilms = await this.visitorService.getListFilms();
 
             const listFilmsWithPhotos = await this.visitorService.filmsListsWithBase64Photo(
@@ -27,6 +28,7 @@ class VisitorController {
             const filmWithPhoto = await this.visitorService.filmWithBase64Photo(
                 film,
             );
+
             res.locals.dataSendStream = JSON.stringify(filmWithPhoto);
             next();
         } catch (error) {
